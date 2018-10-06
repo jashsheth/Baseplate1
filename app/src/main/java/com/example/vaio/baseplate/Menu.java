@@ -57,7 +57,10 @@ String data;
             @Override
             public void onClick(View v) {
             Intent x1=new Intent(getApplicationContext(),test_SQLITE.class);
-            startActivity(x1);
+                Bundle b1=new Bundle();
+                b1.putString("sakshi",data);
+                x1.putExtras(b1);
+                startActivity(x1);
             }
         });
 

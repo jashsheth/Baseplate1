@@ -44,7 +44,7 @@ public class clean extends AppCompatActivity {
         submit = (Button) findViewById(R.id.but5);
 
         jdb = new DatabaseHelper(this);
-        Toast.makeText(getApplicationContext(), "as", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext(), "as", Toast.LENGTH_SHORT).show();
         c = (CheckBox) findViewById(R.id.cb1);
         c2 = (CheckBox) findViewById(R.id.cb2);
         Bundle b1 = getIntent().getExtras();

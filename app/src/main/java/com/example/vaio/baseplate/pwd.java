@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.util.List;
@@ -18,17 +19,21 @@ CheckBox cb;
 CheckBox cbt;
 Geocoder gc;
 TextView addr;
-String fulladd;
+String fulladd,complain,data;
     List<Address> addresses;
     Double lat=19.0727373;
     Double longi=72.9002638;
     Button b;
+    DatabaseHelper jdb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pwd);
 
+        Bundle b1 = getIntent().getExtras();
+        data = b1.getString("sakshi");
+        jdb=new DatabaseHelper(this);
         b=(Button)findViewById(R.id.button7);
         gc=new Geocoder(this,Locale.getDefault());
         cb=(CheckBox)findViewById(R.id.checkBox);
@@ -53,8 +58,31 @@ String fulladd;
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                s
+                if (cb.isChecked()) {
+                    //Toast.makeText(getApplicationContext(), "1111111111111111", Toast.LENGTH_SHORT).show();
+                    complain += cb.getText();
+                }
+                if (cbt.isChecked()) {
+                    //Toast.makeText(getApplicationContext(), "22222", Toast.LENGTH_SHORT).show();
+                    complain += cbt.getText();
+
+                }
+                AddData();
             }
+
         });
+
+
+
+    }
+    public void AddData()
+    {
+        boolean ans=jdb.insertData(data,complain,fulladd);
+        if (ans==true)
+        {
+            Toast.makeText(getApplicationContext(),"SUcissssss",Toast.LENGTH_SHORT).show();
+        }
+        else
+            Toast.makeText(getApplicationContext(),"Faillllll",Toast.LENGTH_SHORT).show();
     }
 }
